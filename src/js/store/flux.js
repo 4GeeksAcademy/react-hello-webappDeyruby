@@ -1,45 +1,94 @@
+import { element } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts: [],
+			contact: {},
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			createContact: (data) => {
+				fetch("https://playground.4geeks.com/apis/fake/contact/", {
+					method: "POST",
+					headers: {
+						"content-type": "application/json",
+					},
+					body: JSON.stringify({
+						"full_name": data.full_name,
+						"email": data.email,
+						"agenda_slug": "Agenda_de_Dey",
+						"address": data.address,
+						"phone": data.phone
+					})
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+				}).then((response) => {
+					return response.json()
+				}).then((data) => {
+					console.log("data", data)
+				}).catch((error) =>
+					console.log(error));
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			getContacts: () => {
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/Agenda_de_Dey", {
+					method: "GET",
+					headers: {
+						"content-type": "application/json",
+					},
+				}).then((response) => {
+					return response.json()
+				}).then((data) => {
+					setStore({ contacts: [...data] })
+				}).catch((error) =>
+					console.log(error));
+			},
+
+
+
+			putContact: (data) => {
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${data.id}`, {
+					method: "PUT",
+					headers: {
+						"content-type": "application/json",
+					},
+
+					body: JSON.stringify({
+						"full_name": data.full_name,
+						"email": data.email,
+						"agenda_slug": "Agenda_de_Dey",
+						"address": data.address,
+						"phone": data.phone
+
+					}),
+				}).then(() => {
+					return response.json()
+				}).then((data) => {
+					console.log("data", data)
+				})
+					.catch((error) =>
+						console.log(error))
+			},
+
+			deleteContact: (id) => {
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+					method: "DELETE",
+					headers: {
+						"content-type": "application/json",
+					},
+				}).then((response) => {
+					if (!response.ok) {
+						throw new Error(`HTTP error! status: ${response.status}`);
+					}
+					return response.json();
+				})
+					.catch((error) => {
+						console.log("Error:", error);
+					});
+			},
+
 		}
 	};
 };
+
 
 export default getState;
