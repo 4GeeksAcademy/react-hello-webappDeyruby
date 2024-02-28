@@ -43,7 +43,6 @@ export const ContactForm = () => {
             <Link to="/">
               <a href="#" className="text-decoration-none">or get back to contacts</a>
             </Link>
-          
         </form>
       </div>
     </>

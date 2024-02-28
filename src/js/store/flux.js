@@ -43,6 +43,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error));
 			},
 
+			getContact: (id) => {
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+					method: "GET",
+					headers: {
+						"content-type": "application/json",
+					},
+				}).then((response) => {
+					return response.json()
+				}).then((data) => {
+					setStore({ contact: data })
+					console.log("data", data)
+				}).catch ((error) =>
+					console.log(error));
+			},
 
 
 			putContact: (data) => {

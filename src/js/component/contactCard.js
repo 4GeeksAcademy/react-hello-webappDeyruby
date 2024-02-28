@@ -12,6 +12,7 @@ export const ContactCard = ({ id, full_name, address, phone, email }) => {
 	const handleDelete = async () => {
 		await actions.deleteContact(id)
 		await actions.getContacts()
+		window.location.reload()
 	};
 
 
