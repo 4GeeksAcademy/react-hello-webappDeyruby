@@ -1,25 +1,32 @@
-.img{
-    border-radius: 50%;
-    height: 150px;
-    width: 150px;
-}
 
-.container-box{
-    border:  grey 1px solid;
-    width: 950px;
-    margin-top:20px ;
-}
 
-.Icons{
-    padding-left: 500px;
+
+
+@media (max-width: 993px){
+    .Button{
+        align-items: center;
+        background-color: green;
+        border-radius: 5px
+    }
 
 }
 
-.Button{
+@media not (max-width: 993px){
+  
+    .Button{
 
-    margin-top: 80px;
-    background-color: green;
-    margin-left: 1000px;
-    border-radius: 5px;
+        margin-top: 80px;
+        background-color: green;
+        margin-left: 850px;
+        border-radius: 5px
+    }
 }
+
+
+
+
+
+
+
+
 

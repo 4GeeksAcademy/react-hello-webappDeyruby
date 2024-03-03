@@ -27,6 +27,8 @@ export const UpdateContact = () => {
     return (
         <>
             <div className="container">
+                <div className="row">
+                    <div className= "col md-12">
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <h1 className="text-center">Update Contact</h1>
@@ -51,8 +53,9 @@ export const UpdateContact = () => {
                     <Link to="/">
                         <a href="#" className="text-decoration-none">or get back to contacts</a>
                     </Link>
-
                 </form>
+                </div>
+                </div>
             </div>
         </>
     )
